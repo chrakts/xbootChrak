@@ -139,10 +139,11 @@ int main(void)
         UART_EN_PORT.DIRSET = (1 << UART_TxEN_PIN) | (1 << UART_RxEN_PIN) | (1 << UART_TX_PIN);
         UART_EN_PORT.OUTCLR = (1 << UART_TxEN_PIN) | (1 << UART_RxEN_PIN);
 
+        /*
         unsigned char p;
         for(p=67;p<87;p++)
           send_char(p);
-
+        */
 
         #ifdef USE_FIFO
         // Initialize FIFO
@@ -798,14 +799,14 @@ void __attribute__ ((noinline)) send_char(unsigned char c)
 			UART_DEVICE.CTRLB = USART_TXEN_bm;
       UART_EN_PORT.OUTSET = (1 << UART_TxEN_PIN) ;
       UART_DEVICE.STATUS |= USART_TXCIF_bm;
-			_delay_us(10); // mindestens 8 beim atxmega256a3u, 5 bei stxmega32a4u
+			_delay_us(12); // mindestens 8 beim atxmega256a3u, 5 bei stxmega32a4u
 			UART_DEVICE.DATA = c; //	UDR0 = data; 			        // Start transmittion
-			_delay_us(10); // mindestens 8 beim atxmega256a3u, 5 bei stxmega32a4u
+			_delay_us(12); // mindestens 8 beim atxmega256a3u, 5 bei stxmega32a4u
       while (!(UART_DEVICE.STATUS & USART_TXCIF_bm))
       { }
       UART_DEVICE.STATUS |= USART_TXCIF_bm;
       UART_DEVICE.STATUS |= USART_RXCIF_bm;
-			_delay_us(10); // mindestens 8 beim atxmega256a3u, 5 bei stxmega32a4u
+			_delay_us(12); // mindestens 8 beim atxmega256a3u, 5 bei atxmega32a4u
 
       UART_EN_PORT.OUTCLR = (1 << UART_TxEN_PIN);
       UART_DEVICE.CTRLB = 0;

@@ -53,7 +53,6 @@
 #define XBOOT_VERSION_MINOR 7
 
 // config.h
-#define USE_CONFIG_H
 
 #ifdef USE_CONFIG_H
 #include "xBootConfig.h"
